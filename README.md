@@ -19,3 +19,7 @@ Then, to make it actually work, you need to get the [command line tool](https://
 ```
 
 What that does is authenticates with iQuestria and stores your token.
+
+### Downlol
+
+[DOWNLOAD DEBIAN SHITTER HERE](http://forums.iquestria.net/resources/iquestria-gyazo.4/)
