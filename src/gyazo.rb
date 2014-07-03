@@ -5,6 +5,7 @@ browser_cmd = 'xdg-open'
 clipboard_cmd = 'xclip'
 
 require 'net/http'
+require 'json'
 
 # get id
 idfile = ENV['HOME'] + "/.gyazo.id"
@@ -17,6 +18,19 @@ end
 # capture png file
 tmpfile = "/tmp/image_upload#{$$}.png"
 imagefile = ARGV[0]
+
+auth_file = Dir.home + "/.iquestria/5LyCQXSW0c42P8N6.token"
+
+body = ""
+
+File.open(auth_file, "r") do |f|
+  f.each_line do |line|
+    body += line
+  end
+end
+
+jsonbody = JSON.parse(body)
+AUTH_TOKEN = jsonbody["token"]
 
 if imagefile && File.exist?(imagefile) then
   system "convert '#{imagefile}' '#{tmpfile}'"
@@ -34,9 +48,9 @@ File.delete(tmpfile)
 # upload
 boundary = '----BOUNDARYBOUNDARY----'
 
-HOST = 'gyazo.com'
-CGI = '/upload.cgi'
-UA   = 'Gyazo/1.0'
+HOST = 'iquestria.net'
+CGI = '/gyazo.php'
+UA   = 'iQuestria-Gyazo/1.0'
 
 data = <<EOF
 --#{boundary}\r
@@ -44,7 +58,7 @@ content-disposition: form-data; name="id"\r
 \r
 #{id}\r
 --#{boundary}\r
-content-disposition: form-data; name="imagedata"; filename="gyazo.com"\r
+content-disposition: form-data; name="imagedata"; filename="image.png"\r
 \r
 #{imagedata}\r
 --#{boundary}--\r
@@ -53,7 +67,8 @@ EOF
 header ={
   'Content-Length' => data.length.to_s,
   'Content-type' => "multipart/form-data; boundary=#{boundary}",
-  'User-Agent' => UA
+  'User-Agent' => UA,
+  'Gyazo-Auth-Token' => AUTH_TOKEN
 }
 
 env = ENV['http_proxy']
