@@ -1,13 +1,13 @@
 Source: gyazo
 Section: graphics
 Priority: optional
-Maintainer: Keisuke Kambara <kambara@sappari.org>
+Maintainer: TJ Horner <geekygamer14@iquestria.net>
 Build-Depends: debhelper (>= 7.0.50~)
 Standards-Version: 3.9.1
-Homepage: http://gyazo.com/
+Homepage: http://gyazo.iquestria.net/
 
 Package: gyazo
 Architecture: all
-Depends: ruby, imagemagick
-Description: Seriously Instant Screen-Grabbing
- Gyazo lets you instantly grab the screen and upload the image to the web. You can easily share them on Chat, Twitter, Blog, Tumblr, etc.
+Depends: ruby, imagemagick, bundler
+Description: LOL MODDED
+ Gyazo modded to work with iQuestria.
